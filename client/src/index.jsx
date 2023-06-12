@@ -9,7 +9,17 @@ const App = () => {
   const [repos, setRepos] = useState([]);
 
   const search = (term) => {
-    console.log(`${term} was searched`);
+    $.ajax({
+      method: 'POST',
+      url: '/repos',
+      data: term,
+      success: (data, string) => {
+        console.log(`${term} was searched, ${string}.`);
+      },
+      error: () => {
+        console.log(`error searching ${term}.`);
+      }
+    })
   }
 
   return (

@@ -1,6 +1,8 @@
 const express = require('express');
 let app = express();
 
+app.use(express.static('client/dist'));
+
 // TODO - your code here!
 // Set up static file service for files in the `client/dist` directory.
 // Webpack is configured to generate files in that directory and

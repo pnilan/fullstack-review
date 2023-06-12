@@ -4,7 +4,7 @@ const Search = ({ onSearch }) => {
 
   const[term, setTerm] = useState('')
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setTerm(e.target.value);
   }
 
@@ -15,7 +15,7 @@ const Search = ({ onSearch }) => {
   return (
     <div>
       <h4>Add more repos!</h4>
-      Enter a github username: <input value={term} onChange={onChange}/>
+      Enter a github username: <input value={term} onChange={handleChange}/>
       <button onClick={search}> Add Repos </button>
     </div>
   );
