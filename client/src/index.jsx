@@ -12,14 +12,17 @@ const App = () => {
     $.ajax({
       method: 'POST',
       url: '/repos',
-      data: term,
+      data: {
+        "username": term
+      },
+      dataType: 'json',
       success: (data, string) => {
         console.log(`${term} was searched, ${string}.`);
       },
       error: () => {
         console.log(`error searching ${term}.`);
       }
-    })
+    });
   }
 
   return (
