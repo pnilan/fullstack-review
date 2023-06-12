@@ -15,12 +15,12 @@ const App = () => {
       data: {
         "username": term
       },
-      dataType: 'json',
-      success: (data, string) => {
-        console.log(`${term} was searched, ${string}.`);
+      success: (res) => {
+        console.log(`success: ${term} was found. Repos added.`);
       },
-      error: () => {
-        console.log(`error searching ${term}.`);
+      error: (err, string) => {
+        console.log(err, string);
+        console.log(`error searching for ${term}.`);
       }
     });
   }
