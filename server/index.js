@@ -1,3 +1,4 @@
+const config = require('../config.js');
 const express = require('express');
 const { getReposByUsername } = require('../helpers/github');
 const { save, getAll } = require('../database');
@@ -44,7 +45,7 @@ app.get('/repos', function (req, res) {
   });
 });
 
-let port = 1128;
+let port = config.PORT;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
