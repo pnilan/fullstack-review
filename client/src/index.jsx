@@ -7,6 +7,7 @@ import RepoList from './components/RepoList.jsx';
 const App = () => {
 
   const [repos, setRepos] = useState([]);
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     $.ajax({
@@ -21,23 +22,26 @@ const App = () => {
         console.log('error retrieving repos from db');
       }
     })
-  }, []);
+  }, [render]);
 
   const search = (term) => {
-    $.ajax({
-      method: 'POST',
-      url: '/repos',
-      data: {
-        "username": term
-      },
-      success: (res) => {
-        console.log(`success: ${term} was found. Repos added.`);
-      },
-      error: (err, string) => {
-        console.log(err, string);
-        console.log(`error searching for ${term}.`);
-      }
-    });
+    if (term.length !== 0) {
+      $.ajax({
+        method: 'POST',
+        url: '/repos',
+        data: {
+          "username": term
+        },
+        success: (res) => {
+          console.log(`success: ${term} was found. Repos added.`);
+          setRender(!render);
+        },
+        error: (err, string) => {
+          console.log(err, string);
+          console.log(`error searching for ${term}.`);
+        }
+      });
+    }
   }
 
   return (
