@@ -10,19 +10,22 @@ const App = () => {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
+    getRepos();
+  }, []);
+
+  const getRepos = () => {
     $.ajax({
       method: 'GET',
       url: '/repos',
       success: (res) => {
         console.log('repos successfully retrieved from db');
-        console.log(res);
          setRepos(res);
       },
       error: () => {
         console.log('error retrieving repos from db');
       }
     })
-  }, [render]);
+  }
 
   const search = (term) => {
     if (term.length !== 0) {
@@ -34,7 +37,7 @@ const App = () => {
         },
         success: (res) => {
           console.log(`success: ${term} was found. Repos added.`);
-          setRender(!render);
+          getRepos();
         },
         error: (err, string) => {
           console.log(err, string);
