@@ -42,4 +42,15 @@ let save = (repos, callback) => {
   callback(null, 'success');
 }
 
+const getAll = (callback) => {
+  Repo.find({}).sort({ stargazers_count: 'desc'}).limit(25)
+    .then((repos) => {
+      callback(null, repos);
+    })
+    .catch((err) => {
+      callback('Error retrieving repos from database');
+    })
+}
+
 module.exports.save = save;
+module.exports.getAll = getAll;

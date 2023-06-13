@@ -1,6 +1,6 @@
 const express = require('express');
 const { getReposByUsername } = require('../helpers/github');
-const { save } = require('../database');
+const { save, getAll } = require('../database');
 const app = express();
 
 
@@ -35,6 +35,13 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  getAll((err, repos) => {
+    if (err) {
+      res.status(500).end();
+    } else {
+      res.send(repos);
+    }
+  });
 });
 
 let port = 1128;
